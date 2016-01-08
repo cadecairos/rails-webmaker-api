@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  url: postgresql://webmaker:webmaker@localhost:5432/rails_wm_api
+
+test:
+  <<: *default
+  url: postgresql://webmaker:webmaker@localhost:5432/test_rails_wm_api
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>

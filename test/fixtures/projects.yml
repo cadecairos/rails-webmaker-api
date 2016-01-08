@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  remixed_from: 
+  version: MyString
+  title: MyString
+  featured: false
+  deleted_at: 2016-01-07 16:04:24
+  thumbnail: 
+  description: MyText
+  metadata: 
+
+two:
+  user_id: 
+  remixed_from: 
+  version: MyString
+  title: MyString
+  featured: false
+  deleted_at: 2016-01-07 16:04:24
+  thumbnail: 
+  description: MyText
+  metadata: 

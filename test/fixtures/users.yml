@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  deleted_at: 2016-01-07 15:54:11
+  language: MyString
+  moderator: false
+  staff: false
+
+two:
+  username: MyString
+  deleted_at: 2016-01-07 15:54:11
+  language: MyString
+  moderator: false
+  staff: false
