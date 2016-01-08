@@ -1,0 +1,11 @@
+Fri, 08 Jan 2016 00:27:42 -0500
+README.rdoc	Wed, 06 Jan 2016 13:50:44 -0500
+app/controllers/application_controller.rb	Thu, 07 Jan 2016 17:13:44 -0500
+app/controllers/projects_controller.rb	Thu, 07 Jan 2016 23:19:32 -0500
+app/controllers/users_controller.rb	Thu, 07 Jan 2016 23:08:46 -0500
+app/helpers/application_helper.rb	Wed, 06 Jan 2016 13:50:44 -0500
+app/helpers/project_helper.rb	Thu, 07 Jan 2016 16:38:23 -0500
+app/helpers/user_helper.rb	Thu, 07 Jan 2016 16:38:05 -0500
+app/models/project.rb	Fri, 08 Jan 2016 00:19:39 -0500
+app/models/user.rb	Thu, 07 Jan 2016 23:52:38 -0500
+app/serializers/hash_serializer.rb	Thu, 07 Jan 2016 17:00:54 -0500
