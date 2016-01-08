@@ -1,15 +1,16 @@
 class CreateProjects < ActiveRecord::Migration
   def change
     create_table :projects do |t|
-      t.references :user, index: true, foreign_key: true
       t.integer :remixed_from
       t.string :version
       t.string :title
       t.boolean :featured
       t.datetime :deleted_at
-      t.jsonb :thumbnail
+      t.string :thumbnail, default: ""
       t.text :description
-      t.jsonb :metadata
+      t.jsonb :metadata, default: '{}'
+
+      t.references :user
 
       t.timestamps null: false
     end

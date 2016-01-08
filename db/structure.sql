@@ -30,12 +30,46 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: pages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE pages (
+    id integer NOT NULL,
+    x integer NOT NULL,
+    y integer NOT NULL,
+    deleted_at timestamp without time zone,
+    styles jsonb DEFAULT '{}'::jsonb,
+    project_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE pages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE pages_id_seq OWNED BY pages.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE projects (
     id integer NOT NULL,
-    user_id integer,
     remixed_from integer,
     version character varying,
     title character varying,
@@ -44,6 +78,7 @@ CREATE TABLE projects (
     thumbnail character varying DEFAULT ''::character varying,
     description text,
     metadata jsonb DEFAULT '{}'::jsonb,
+    user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -116,6 +151,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY pages ALTER COLUMN id SET DEFAULT nextval('pages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
@@ -124,6 +166,14 @@ ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq':
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY pages
+    ADD CONSTRAINT pages_pkey PRIMARY KEY (id);
 
 
 --
@@ -143,17 +193,10 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: index_projects_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_pages_on_id_and_x_and_y; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_projects_on_user_id ON projects USING btree (user_id);
-
-
---
--- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_username ON users USING btree (username);
+CREATE UNIQUE INDEX index_pages_on_id_and_x_and_y ON pages USING btree (id, x, y) WHERE (deleted_at IS NULL);
 
 
 --
@@ -171,14 +214,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: fk_rails_b872a6760a; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY projects
-    ADD CONSTRAINT fk_rails_b872a6760a FOREIGN KEY (user_id) REFERENCES users(id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -188,11 +223,5 @@ INSERT INTO schema_migrations (version) VALUES ('20160107205411');
 
 INSERT INTO schema_migrations (version) VALUES ('20160107210424');
 
-INSERT INTO schema_migrations (version) VALUES ('20160108041048');
-
-INSERT INTO schema_migrations (version) VALUES ('20160108041428');
-
-INSERT INTO schema_migrations (version) VALUES ('20160108045842');
-
-INSERT INTO schema_migrations (version) VALUES ('20160108050308');
+INSERT INTO schema_migrations (version) VALUES ('20160108201847');
 

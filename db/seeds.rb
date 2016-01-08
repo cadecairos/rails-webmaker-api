@@ -5,3 +5,21 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+user = User.create(username: "cade", language: "en_US")
+
+project = user.projects.create({title: "test project", description: "#description"})
+
+project.pages.create([{
+  x: 0,
+  y: 0,
+}, {
+  x: 0,
+  y: 1,
+}, {
+  x: 1,
+  y: 0,
+}, {
+  x: 1,
+  y: 1,
+}])
