@@ -39,4 +39,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.debug_exception_response_format = :api
+
+  config.id_server_connection_string = "http://localhost:1234"
 end
