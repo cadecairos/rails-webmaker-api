@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include WebmakerIdentity
+
   before_action :authenticate, exclude: :create
 
   public
@@ -30,22 +32,12 @@ class UsersController < ApplicationController
 
   def authenticate_token
     authenticate_with_http_token do |token, options|
-      response = HTTP.accept(:json)
-        .auth("token #{token}")
-        .get("#{Rails.application.config.id_server_connection_string}/user")
-
-      return false unless response.status == 200
-
-      body_hash = JSON.parse(response.body.to_s)
-
-      return false unless body_hash["id"] == params[:id]
-
-      return true
+      WebmakerIdentity.validate_user token, params[:id]
     end
   end
 
   def render_unauthorized
     self.headers['WWW-Authenticate'] = 'Token realm="User"'
-      render json: 'Bad credentials', status: 401
+    render json: 'Bad credentials', status: 401
   end
 end
